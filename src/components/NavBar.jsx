@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../../assets/logo.png";
-import CartWidget from "../CartWidget";
-import Toggle from "../darkMode/ThemeToggle";
+import logo from "../assets/logo.png";
+import CartWidget from "./CartWidget";
+import Toggle from "./darkMode/ThemeToggle";
 
 const NavBar = () => {
   return (

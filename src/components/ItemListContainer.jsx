@@ -1,4 +1,5 @@
 import React from "react";
+import ItemCount from "./ItemCount";
 
 const products = [
   {
@@ -50,6 +51,7 @@ const ItemListContainer = ({greeting}) => {
     <>
       <div>
       <h2 style={{ color: "red", textAlign: "center" }}>{greeting}</h2>
+      <ItemCount stock='10' initial='0' />
         <section className="py-8">
           <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
             <nav id="store" className="w-full z-30 top-0 px-6 py-1">

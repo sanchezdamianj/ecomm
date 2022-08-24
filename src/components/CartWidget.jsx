@@ -1,6 +1,8 @@
 import React from "react";
 
 const CartWidget = () => {
+
+
   return (
     <div className="pl-3 inline-block no-underline hover:text-black" >
       <svg
