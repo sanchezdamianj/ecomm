@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ItemCount from "./ItemCount";
 import { CircularProgress } from "@chakra-ui/react";
-import { requestData } from '../helpers/requestData'
+import { requestData } from "../helpers/requestData";
 import ItemList from "./ItemList";
 import ItemGridNavContainer from "./ItemGridNavContainer";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,7 +28,7 @@ const ItemListContainer = ({ greeting }) => {
     <>
       <div>
         <h2 style={{ color: "red", textAlign: "center" }}>{greeting}</h2>
-        <ItemCount stock="10" initial="0" />
+
         <section className="py-8">
           <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
             <ItemGridNavContainer />
