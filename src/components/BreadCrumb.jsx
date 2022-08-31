@@ -4,11 +4,13 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 const BreadCrumb = ({ categories }) =>
   categories.length > 0 ? (
     <>
-      <Breadcrumb
+      <Breadcrumb 
+        fontSize='sm'
+        fontWeight='medium'
         aria-label="Breadcrumb"
         spacing="8px"
         separator={">"}
-        className="breadcrumb mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+        className="breadcrumb mx-auto mt-2 flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
       >
         {categories.map(({ name }) => {
           return (
