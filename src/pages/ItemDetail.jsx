@@ -1,41 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Spinner } from "@chakra-ui/spinner";
-import { Breadcrumb } from "@chakra-ui/react";
-import ItemCount from '../components/ItemCount'
+import React from "react";
+import ItemCount from "../components/ItemCount";
 
-const ItemDetail = () => {
-  const [item, setItem] = useState([]);
-
-
-  const [isLoading, setIsLoading] = useState(false);
-  //   const id = window.location.pathname;
-  const parseString = "9";
-
-  useEffect(() => {
-    // const position = id.indexOf("/", 2);
-    // const parseString = id.substring(position);
-    setIsLoading(true);
-
-    fetch(
-      `https://api.mercadolibre.com/sites/MLA/search?q=${parseString}&limit=1`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setIsLoading(false);
-        setItem(data.results[0]);
-      });
-  }, []);
-
-//   const onAdd = (quantity) => {
-
-//   } 
-
-  return !isLoading ? (
+const ItemDetail = ( {item} ) => {
+   
+  return (
     <>
-      
       <div className="lg:h-screen">
-        <div className="">
-          <Breadcrumb />
+        <div className="mt-4">
           {/* <!-- Image gallery --> */}
           <div className="mx-auto mt-0 max-w-2l sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
@@ -52,7 +23,7 @@ const ItemDetail = () => {
                   alt="Model"
                   className="h-full w-full object-cover object-center"
                 />
-              </div> 
+              </div>
             </div>
             <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
               <img
@@ -74,9 +45,7 @@ const ItemDetail = () => {
             {/* <!-- Options --> */}
             <div className="mt-2 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight">
-                $ {item.original_price}
-              </p>
+              <p className="text-3xl tracking-tight">$ {item.original_price}</p>
 
               {/* <!-- Reviews --> */}
               <div className="mt-6">
@@ -148,12 +117,12 @@ const ItemDetail = () => {
               </div>
 
               <div className="mt-8">
-              <ItemCount stock="10" initial="0" />
+                <ItemCount stock="10" initial="0" />
                 <button
                   type="submit"
                   className="mt-8 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                //   onClick={onAdd}  
-               >
+                  //   onClick={onAdd}
+                >
                   Add to bag
                 </button>
               </div>
@@ -173,9 +142,7 @@ const ItemDetail = () => {
                 <h2 className="text-sm font-medium ">Details</h2>
 
                 <div className="mt-4 space-y-6">
-                  <p className="text-sm text-gray-600">
-                    {item.title}
-                  </p>
+                  <p className="text-sm text-gray-600">{item.title}</p>
                 </div>
               </div>
             </div>
@@ -183,16 +150,6 @@ const ItemDetail = () => {
         </div>
       </div>
     </>
-  ) : (
-    <div className="spinner">
-      <Spinner
-        thickness="4px"
-        speed="0.65s"
-        emptyColor="gray.200"
-        color="blue.500"
-        size="lg"
-      />
-    </div>
   );
 };
 
