@@ -7,7 +7,7 @@ const Item = ({product}) => {
         <div className='relative'>
             <img
           className="w-full hover:grow hover:shadow-lg rounded-2xl"
-          src={product.imageSrc}
+          src={product.thumbnail}
           alt="imag"
         />
           <svg
@@ -20,7 +20,7 @@ const Item = ({product}) => {
           </svg>
           </div>
         <div className="pt-3 flex items-center justify-between">
-          <p className="">{product.name}</p>
+          <p className="">{product.title}</p>
           <button className="bg-blue-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full" >
         +
       </button>

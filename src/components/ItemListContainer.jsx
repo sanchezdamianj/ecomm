@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { CircularProgress } from "@chakra-ui/react";
-import { requestData } from "../helpers/requestData";
+// import { requestData } from "../helpers/requestData";
 import ItemList from "./ItemList";
 import ItemGridNavContainer from "./ItemGridNavContainer";
+
+const basePath = "https://api.mercadolibre.com";
 
 const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
@@ -10,11 +12,12 @@ const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    requestData()
-      .then((res) => {
-        setProducts(res);
+    // requestData(basePath)
+    fetch(`${basePath}/sites/MLA/search?q=ninja&limit=4`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data.results);
         setIsLoading(false);
-        console.log(products);
       })
       .catch((error) => {
         console.log(error);
@@ -22,7 +25,7 @@ const ItemListContainer = ({ greeting }) => {
       .finally(() => {
         console.log("End");
       });
-  }, [products]);
+  }, []);
 
   return !isLoading ? (
     <>
