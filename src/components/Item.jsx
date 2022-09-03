@@ -1,12 +1,13 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 const Item = ({product}) => {
   return (
      <>
+     <Link to={`/items/${product.id}`} >
       <a key={product.id} href="#footer">
         <div className='relative'>
             <img
-          className="w-full hover:grow hover:shadow-lg rounded-2xl"
+          className="w-full hover:grow hover:shadow-lg rounded-5xl"
           src={product.thumbnail}
           alt="imag"
         />
@@ -25,8 +26,9 @@ const Item = ({product}) => {
         +
       </button>
         </div>
-        <p className="pt-1">{product.price}</p>
+        <p className="pt-1 hover:grow">$ {product.price}</p>
       </a>
+      </Link>
   </>
 
 

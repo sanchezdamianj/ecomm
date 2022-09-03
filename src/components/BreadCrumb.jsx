@@ -1,12 +1,12 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-const BreadCrumb = ({ categories }) =>
-  categories.length > 0 ? (
+const BreadCrumb = ({ categories }) => {
+  return categories ? (
     <>
-      <Breadcrumb 
-        fontSize='sm'
-        fontWeight='medium'
+      <Breadcrumb
+        fontSize="sm"
+        fontWeight="medium"
         aria-label="Breadcrumb"
         spacing="8px"
         separator={">"}
@@ -26,4 +26,5 @@ const BreadCrumb = ({ categories }) =>
       <h5>No se encontraron categorias para esta busqueda...</h5>
     </>
   );
+};
 export default BreadCrumb;

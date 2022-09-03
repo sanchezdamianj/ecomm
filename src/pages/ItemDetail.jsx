@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import BreadCrumb from "../components/BreadCrumb";
 import ItemCount from "../components/ItemCount";
+import NoDataFound from "../components/NoDataFound";
+import {basePath} from '../data/data'
 
-const ItemDetail = ( {item} ) => {
-   
+const ItemDetail = ({ item }) => {
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    fetch(`${basePath}/categories/${item.category_id}`)
+      .then((res) => res.json())
+      .then((dataCat) => {
+        setIsLoading(false);
+        setCategories(dataCat.path_from_root);
+      });
+  }, [item]);
   return (
     <>
+      {!isLoading ? (
+        <>
+          <BreadCrumb categories={categories} />
+        </>
+      ) : (
+        <>
+          {" "}
+          <NoDataFound />
+        </>
+      )}
       <div className="lg:h-screen">
         <div className="mt-4">
           {/* <!-- Image gallery --> */}
@@ -45,7 +67,7 @@ const ItemDetail = ( {item} ) => {
             {/* <!-- Options --> */}
             <div className="mt-2 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight">$ {item.original_price}</p>
+              <p className="text-3xl tracking-tight">$ {item.price}</p>
 
               {/* <!-- Reviews --> */}
               <div className="mt-6">
