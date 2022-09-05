@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const NonValuesFound = () => {
   return (
     <>
-    <di className='p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4'>
+    <di className='p-6 max-w-sm mx-auto rounded-xl shadow-lg flex items-center space-x-4'>
       <p className='shrink-0 h-12 w-12 text-slate-500'
       id="messageNotFound">
        No values found 

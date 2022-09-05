@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import ItemCount from "../components/ItemCount";
 import NoDataFound from "../components/NoDataFound";
-import {basePath} from '../data/data'
+import { requestCategory } from "../helpers/requestData";
+import { CircularProgress } from "@chakra-ui/react";
 
 const ItemDetail = ({ item }) => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    fetch(`${basePath}/categories/${item.category_id}`)
+    setIsLoading(true);
+    requestCategory(item.category_id)
       .then((res) => res.json())
       .then((dataCat) => {
         setIsLoading(false);
         setCategories(dataCat.path_from_root);
       });
   }, [item]);
-  return (
+  return ( !isLoading?
     <>
       {!isLoading ? (
         <>
@@ -172,6 +174,11 @@ const ItemDetail = ({ item }) => {
         </div>
       </div>
     </>
+    :
+    <div className="grid h-48 place-items-center text-sm text-gray-900">
+    Loading Detail ...
+    <CircularProgress  isIndeterminate color='green.300' />
+  </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Spinner } from "@chakra-ui/spinner";
+import { Progress } from '@chakra-ui/react'
 import ItemDetail from "../pages/ItemDetail";
-import {basePath} from '../data/data'
+import { requestDetail } from "../helpers/requestData";
 import { useParams } from "react-router-dom";
 
 const ItemDetailContainer = () => {
@@ -11,7 +11,7 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`${basePath}/items/${id}`)
+    requestDetail(id)
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
@@ -25,15 +25,7 @@ const ItemDetailContainer = () => {
     </>
   ) : (
     <>
-      <div className="spinner">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="lg"
-        />
-      </div>
+   <Progress size='xs' isIndeterminate />
     </>
   );
 };

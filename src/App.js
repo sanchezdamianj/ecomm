@@ -15,14 +15,8 @@ function App() {
           <Background>
             <NavBar />
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <ItemListContainer
-                    greeting={"Message inside of the container"}
-                  />
-                }
-              />
+              <Route path="/" element={<ItemListContainer />} />
+              <Route path="/items/search/:id" element={<ItemListContainer />} />
               <Route path="/items/:id" element={<ItemDetailContainer />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
