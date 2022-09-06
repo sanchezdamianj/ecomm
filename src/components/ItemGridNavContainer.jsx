@@ -1,11 +1,11 @@
 import React from 'react'
 
-const ItemGridNavContainer = () => {
+const ItemGridNavContainer = ({productType}) => {
   return (
     <nav id="store" className="w-full z-30 top-0 px-6 py-1">
     <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
       <div className="uppercase tracking-wide no-underline hover:no-underline font-bold text-xl ">
-        Products
+        {productType}
       </div>
       <div className="flex items-center" id="store-nav-content">
         <div className="pl-3 inline-block no-underline hover:text-black">

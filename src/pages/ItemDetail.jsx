@@ -15,9 +15,37 @@ const ItemDetail = ({ item }) => {
       .then((dataCat) => {
         setIsLoading(false);
         setCategories(dataCat.path_from_root);
+        console.log(item);
       });
   }, [item]);
-  return ( !isLoading?
+
+  // const starsRating = ({ item }) => {
+  //   const rate = Number(item.installments.rate);
+  //   let stars = 0;
+  //   let from = 0;
+  //   let to = 100;
+
+  //   switch (from < rate < to) {
+  //     case 0 < rate < 20:
+  //       stars = 1;
+  //       break;
+  //     case 21 < rate < 40:
+  //       stars = 2;
+  //       break;
+  //     case 41 < rate < 60:
+  //       stars = 3;
+  //       break;
+  //     case 61 < rate < 80:
+  //       stars = 4;
+  //       break;
+  //     default:
+  //       stars = 5;
+  //       break;
+  //   }
+  //   return stars;
+  // };
+
+  return !isLoading ? (
     <>
       {!isLoading ? (
         <>
@@ -33,29 +61,59 @@ const ItemDetail = ({ item }) => {
         <div className="mt-4">
           {/* <!-- Image gallery --> */}
           <div className="mx-auto mt-0 max-w-2l sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-            <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-              <img
-                src={item.thumbnail}
-                alt="Two ."
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-            <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-0">
-              <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-                <img
-                  src={item.thumbnail}
-                  alt="Model"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-            </div>
-            <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-              <img
-                src={item.thumbnail}
-                alt="Mode."
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
+            {item.pictures ? (
+              <>
+                <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+                  <img
+                    src={item.pictures[0].url}
+                    alt="Two ."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-0">
+                  <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                    <img
+                      src={item.pictures[1].url}
+                      alt="Model"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                </div>
+                <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+                  <img
+                    src={item.pictures[2].url}
+                    alt="Mode."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+                  <img
+                    src={item.thumbnail}
+                    alt="Two ."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+                <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-0">
+                  <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                    <img
+                      src={item.thumbnail}
+                      alt="Model"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  </div>
+                </div>
+                <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+                  <img
+                    src={item.thumbnail}
+                    alt="Mode."
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              </>
+            )}
           </div>
 
           {/* <!-- Product info --> */}
@@ -76,52 +134,10 @@ const ItemDetail = ({ item }) => {
                 <h3 className="sr-only">Reviews</h3>
                 <div className="flex items-center">
                   <div className="flex items-center">
+                    {}
+
                     <svg
                       className="h-5 w-5 flex-shrink-0"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
-                    </svg>
-
-                    {/* <!-- Heroicon name: mini/star --> */}
-                    <svg
-                      className="h-5 w-5 flex-shrink-0"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
-                    </svg>
-
-                    {/* <!-- Heroicon name: mini/star --> */}
-                    <svg
-                      className=" h-5 w-5 flex-shrink-0"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
-                    </svg>
-
-                    {/* <!-- Heroicon name: mini/star --> */}
-                    <svg
-                      className=" h-5 w-5 flex-shrink-0"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
-                    </svg>
-
-                    {/* <!-- Heroicon name: mini/star --> */}
-                    <svg
-                      className="text-gray-200 h-5 w-5 flex-shrink-0"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -130,13 +146,13 @@ const ItemDetail = ({ item }) => {
                       <path d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" />
                     </svg>
                   </div>
-                  <p className="sr-only">4 out of 5 stars</p>
-                  <a
+
+                  <div
                     href="2"
                     className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    sold quantity {item.sold_quantity}
-                  </a>
+                    Available quantity {item.available_quantity}
+                  </div>
                 </div>
               </div>
 
@@ -174,11 +190,11 @@ const ItemDetail = ({ item }) => {
         </div>
       </div>
     </>
-    :
+  ) : (
     <div className="grid h-48 place-items-center text-sm text-gray-900">
-    Loading Detail ...
-    <CircularProgress  isIndeterminate color='green.300' />
-  </div>
+      Loading Detail ...
+      <CircularProgress isIndeterminate color="green.300" />
+    </div>
   );
 };
 

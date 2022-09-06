@@ -20,6 +20,7 @@ const NavBar = () => {
   const home = () => {
     setSearch("");
     navigate("/");
+
   };
   return (
     <>
