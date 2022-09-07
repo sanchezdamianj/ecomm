@@ -61,7 +61,7 @@ const ItemDetail = ({ item }) => {
         <div className="mt-4">
           {/* <!-- Image gallery --> */}
           <div className="mx-auto mt-0 max-w-2l sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-            {item.pictures ? (
+            { (item.pictures && item.pictures.length >= 3) ? (
               <>
                 <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
                   <img

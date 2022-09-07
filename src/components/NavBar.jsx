@@ -11,16 +11,15 @@ const NavBar = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    setSearch((e.target.value).trim());
+    setSearch(e.target.value.trim());
   };
   const handleSearch = (evt) => {
     evt.preventDefault();
     navigate({ pathname: `/items/search/${search}` });
   };
   const home = () => {
-    setSearch("");
+    setSearch(" ");
     navigate("/");
-
   };
   return (
     <>
@@ -94,7 +93,7 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="inline-block no-underline rounded-sm hover:text-black fill-current px-2 py-1 mr-8"
+                  className="text-black inline-block no-underline rounded-sm hover:text-black fill-current px-2 py-1 mr-8"
                 ></input>
                 <button
                   type="submit"
@@ -116,5 +115,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// 1:47 ver

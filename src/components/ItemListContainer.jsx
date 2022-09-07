@@ -17,7 +17,6 @@ const ItemListContainer = () => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.results);
-        console.log(products)
       })
       .catch((error) => {
         console.log(error);
@@ -27,14 +26,13 @@ const ItemListContainer = () => {
       });
   }, [id]);
 
- 
   return !isLoading ? (
     <>
       <Banner />
       <section className="py-8">
         <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 ">
           <>
-            {(id === undefined || id === null) ? (
+            {id === undefined || id === null ? (
               <ItemGridNavContainer productType={"Top Sale Products"} />
             ) : (
               <ItemGridNavContainer productType={"Products"} />
