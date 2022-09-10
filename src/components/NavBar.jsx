@@ -3,11 +3,13 @@ import logo from "../assets/logo.png";
 import CartWidget from "./CartWidget";
 import Toggle from "./darkMode/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { CartContext } from "./context/CartContext";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState([]);
+  const {cart} = useContext(CartContext)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -102,7 +104,7 @@ const NavBar = () => {
                   Search
                 </button>
               </form>
-              <CartWidget />
+              <CartWidget orderQuantity={cart.length}/>
               <div className="pl-3 inline-block no-underline hover:text-black">
                 <Toggle />
               </div>

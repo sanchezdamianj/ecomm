@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import ItemCount from "../components/ItemCount";
 import NoDataFound from "../components/NoDataFound";
 import { requestCategory } from "../helpers/requestData";
-import { CircularProgress } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import {
+  CircularProgress,
+  // Alert,
+  // AlertIcon,
+  // AlertTitle,
+  // AlertDescription
+} from "@chakra-ui/react";
+import { CartContext } from "../components/context/CartContext";
 
 const ItemDetail = ({ item }) => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const navigate = useNavigate();
+  const { cart, addToCart, isInCart } = useContext(CartContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,7 +25,6 @@ const ItemDetail = ({ item }) => {
       .then((dataCat) => {
         setIsLoading(false);
         setCategories(dataCat.path_from_root);
-        console.log(item);
       });
   }, [item]);
 
@@ -31,8 +36,16 @@ const ItemDetail = ({ item }) => {
       orderQuantity: quantity,
       image: item.thumbnail,
     };
-    console.log(itemToCart);
-    navigate({ pathname: "/cart" });
+    if (!isInCart(item.id)) {
+      addToCart(itemToCart);
+    } else {
+      const prevReapetedItem = cart.find(
+        (itemInCart) => itemInCart.id === item.id
+      );
+      const prevQuantity = prevReapetedItem.orderQuantity;
+      addToCart({ ...prevReapetedItem, orderQuantity: prevQuantity + quantity });
+      
+    }
   };
 
   return !isLoading ? (
@@ -46,8 +59,8 @@ const ItemDetail = ({ item }) => {
           <NoDataFound />
         </>
       )}
-      <div className="lg:h-screen">
-        <div className="mt-4">
+      <div className="lg:h-2/3">
+        <div className="mt-4 h-full">
           {/* <!-- Image gallery --> */}
           <div className="mx-auto mt-0 max-w-2l sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
             {item.pictures && item.pictures.length >= 3 ? (
@@ -56,7 +69,7 @@ const ItemDetail = ({ item }) => {
                   <img
                     src={item.pictures[0].url}
                     alt="Two ."
-                    className="h-full w-full object-cover object-center"
+                    className="h-6/12 w-full object-cover object-center"
                   />
                 </div>
                 <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-0">
@@ -64,7 +77,7 @@ const ItemDetail = ({ item }) => {
                     <img
                       src={item.pictures[1].url}
                       alt="Model"
-                      className="h-full w-full object-cover object-center"
+                      className="h-1/2 w-full object-cover object-center"
                     />
                   </div>
                 </div>
@@ -72,7 +85,7 @@ const ItemDetail = ({ item }) => {
                   <img
                     src={item.pictures[2].url}
                     alt="Mode."
-                    className="h-full w-full object-cover object-center"
+                    className="h-6/12 w-full object-cover object-center"
                   />
                 </div>
               </>
