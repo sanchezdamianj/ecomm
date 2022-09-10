@@ -1,8 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useCartContext } from "./context/CartContext";
+
 
 const CartWidget = ({ orderQuantity }) => {
+const {cartQuantity} = useCartContext()
   return (
     <>
+     <Link to={'/cart'} >
       <div className="pl-3 inline-block no-underline hover:text-black">
         <svg
           className="fill-current hover:text-black"
@@ -17,7 +22,8 @@ const CartWidget = ({ orderQuantity }) => {
           <circle cx="17.5" cy="18.5" r="1.5" />
         </svg>
       </div>
-      {orderQuantity}
+      {cartQuantity()}
+      </Link>
     </>
   );
 };

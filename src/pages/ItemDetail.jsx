@@ -3,20 +3,17 @@ import BreadCrumb from "../components/BreadCrumb";
 import ItemCount from "../components/ItemCount";
 import NoDataFound from "../components/NoDataFound";
 import { requestCategory } from "../helpers/requestData";
-import {
-  CircularProgress,
-  // Alert,
-  // AlertIcon,
-  // AlertTitle,
-  // AlertDescription
-} from "@chakra-ui/react";
+import { CircularProgress, Alert, AlertIcon } from "@chakra-ui/react";
 import { CartContext } from "../components/context/CartContext";
+import { useNavigate } from "react-router-dom";
+
 
 const ItemDetail = ({ item }) => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const { cart, addToCart, isInCart } = useContext(CartContext);
+  const { addToCart, isInCart} = useContext(CartContext);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -38,13 +35,10 @@ const ItemDetail = ({ item }) => {
     };
     if (!isInCart(item.id)) {
       addToCart(itemToCart);
+      setFlag(false);
     } else {
-      const prevReapetedItem = cart.find(
-        (itemInCart) => itemInCart.id === item.id
-      );
-      const prevQuantity = prevReapetedItem.orderQuantity;
-      addToCart({ ...prevReapetedItem, orderQuantity: prevQuantity + quantity });
-      
+      setFlag(true);
+      console.log(flag)
     }
   };
 
@@ -157,7 +151,20 @@ const ItemDetail = ({ item }) => {
                 onAdd={onAdd}
                 setCounter={setQuantity}
                 counter={quantity}
+                flag={flag}
               />
+              <>
+                {flag ? (
+                  <>
+                    <Alert status="warning">
+                      <AlertIcon />
+                      This Product is already in the basket, proceed to checkout
+                    </Alert>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
             </div>
             <div className="py-10 mt-6 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
               {/* <!-- Description and details --> */}
