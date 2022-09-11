@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 export const CartContext = createContext();
 
@@ -6,11 +7,10 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addToCart = (item) => {
-    if(!isInCart(item.id)){
-        setCart([...cart, item]);
+    if (!isInCart(item.id)) {
+      setCart([...cart, item]);
     } else {
-  
-        setCart([cart, item])
+      setCart([cart, item]);
     }
     localStorage.getItem("cart", JSON.stringify(cart));
   };
@@ -29,9 +29,9 @@ const CartProvider = ({ children }) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  const emptyCart = () =>{
-    setCart([])
-  }
+  const emptyCart = () => {
+    setCart([]);
+  };
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
