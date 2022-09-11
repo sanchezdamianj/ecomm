@@ -12,9 +12,9 @@ In the project we consume an API to get data with differents endpoints from the 
 You have to install node js, talwinds css, chakra ui library.
 
 The followings websites to get started:
-https://nodejs.org/es/download/package-manager/
-https://tailwindcss.com/
-https://chakra-ui.com/
+- https://nodejs.org/es/download/package-manager/
+- https://tailwindcss.com/
+- https://chakra-ui.com/
 
 ## Deployment 📦
 
@@ -39,9 +39,9 @@ You may also see any lint errors in the console.
 
 ## Construido con 🛠️
 
-* [React](https://es.reactjs.org/docs) - Frontend JS Library
-* [Tailwind css](https://tailwindcss.com/docs) - Styles
-* [Firebase](https://firebase.google.com/) 
+* [React](https://es.reactjs.org/docs) - Frontend JS Library - 
+* [Tailwind css](https://tailwindcss.com/docs) - Styles -
+* [Firebase](https://firebase.google.com/) -
 
 ## Versionado 📌
 
@@ -49,6 +49,7 @@ Usamos [git](http://git.io/) para el versionado. Para todas las versiones dispon
 
 ## Autores ✒️
 * **Damian Javier Sanchez** - *Frontend Proyect* - [sanchezdamianj](https://github.com/villanuevand)
+[![My Skills](https://skills.thijs.gg/icons?i=js,html,css,react,tailwind)](https://skills.thijs.gg)
 
 ## Licencia 📄
 
