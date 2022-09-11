@@ -9,7 +9,7 @@ import { CartContext } from "./context/CartContext";
 const NavBar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState([]);
-  const {cart} = useContext(CartContext)
+  const {cart, cartQuantity} = useContext(CartContext)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -95,8 +95,9 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="text-black inline-block no-underline rounded-sm hover:text-black fill-current px-2 py-1 mr-8"
-                ></input>
+                  className="inline-block no-underline rounded-sm hover:text-black fill-current px-2 py-1 mr-8"
+                >
+                </input>
                 <button
                   type="submit"
                   className="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-xs px-4 py-2 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
@@ -104,7 +105,7 @@ const NavBar = () => {
                   Search
                 </button>
               </form>
-              <CartWidget orderQuantity={cart.length}/>
+              <CartWidget orderQuantity={cartQuantity}/>
               <div className="pl-3 inline-block no-underline hover:text-black">
                 <Toggle />
               </div>
