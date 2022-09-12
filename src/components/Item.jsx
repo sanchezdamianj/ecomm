@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 const Item = ({ product }) => {
   return (
     <>
-      <div className="hover:grow hover:shadow-lg rounde-sm rounded-3xl px-2">
+            <Link to={`/items/${product.id}`}>
+      <div className="hover:grow hover:shadow-lg rounde-sm rounded-3xl px-2 py-2">
         <div key={product.id} href="#footer">
           <div className="relative">
             <img
@@ -22,17 +23,16 @@ const Item = ({ product }) => {
           </div>
           <div className="pt-3 flex items-center justify-between">
             <p className="text-sm font-semibold">{product.title}</p>
-            <Link to={`/items/${product.id}`}>
-              <button className="bg-violet-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                +
+              <button className="bg-violet-500 hover:bg-green-700 text-white text-xs font-bold py-2 px-4 rounded-full">
+                View more
               </button>
-            </Link>
           </div>
           <p className="pt-1 pb-4 hover:grow font-bold text-xl">
             $ {product.price}
           </p>
         </div>
       </div>
+            </Link>
     </>
   );
 };

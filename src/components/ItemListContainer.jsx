@@ -29,8 +29,8 @@ const ItemListContainer = () => {
   return !isLoading ? (
     <>
       <Banner />
-      <section className="py-8">
-        <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12 ">
+      <section className="py-8 bg-gray-100">
+        <div className="container mx-auto flex items-center flex-wrap pt-4 pb-12">
           <>
             {id === undefined || id === null ? (
               <ItemGridNavContainer productType={"Top Sale Products"} />

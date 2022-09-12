@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React,{ useState } from "react";
 import { useCartContext } from "./context/CartContext";
 
 export const CartItem = ({ item }) => {
@@ -71,6 +70,7 @@ export const CartItem = ({ item }) => {
           </div>
         </div>
       </div>
+     
     </div>
   );
 };

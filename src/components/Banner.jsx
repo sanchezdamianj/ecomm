@@ -12,7 +12,7 @@ const Banner = () => {
           </p>
           <a
             href="#footer"
-            className="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:pointer"
+            className="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-400 hover:pointer"
           >
             Contact us
           </a>

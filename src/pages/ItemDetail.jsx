@@ -53,7 +53,7 @@ const ItemDetail = ({ item }) => {
           <NoDataFound />
         </>
       )}
-      <div className="lg:h-2/3">
+      <div className="lg:h-2/3 bg-gray-100">
         <div className="mt-4 h-full">
           {/* <!-- Image gallery --> */}
           <div className="mx-auto mt-0 max-w-2l sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">

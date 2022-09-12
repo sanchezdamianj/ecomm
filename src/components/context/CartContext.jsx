@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 
 export const CartContext = createContext();
 
@@ -17,6 +16,10 @@ const CartProvider = ({ children }) => {
 
   const isInCart = (id) => {
     return cart.find((item) => item.id === id);
+  };
+  const isUpdated = (id, quantity) => {
+    let itemUpdated =  cart.find((item) => item.id === id);
+   setCart([...cart,{...itemUpdated, orderQuantity: quantity}])
   };
 
   const cartQuantity = () => {
@@ -47,6 +50,7 @@ const CartProvider = ({ children }) => {
         cartTotal,
         removeItem,
         emptyCart,
+        isUpdated
       }}
     >
       {children}

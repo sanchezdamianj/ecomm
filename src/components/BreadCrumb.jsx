@@ -10,7 +10,7 @@ const BreadCrumb = ({ categories }) => {
         aria-label="Breadcrumb"
         spacing="8px"
         separator={">"}
-        className="breadcrumb mx-auto mt-2 flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+        className="breadcrumb mx-auto mt-2 flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-100"
       >
         {categories.map(({ name }) => {
           return (

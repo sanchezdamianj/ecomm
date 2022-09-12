@@ -5,11 +5,13 @@ import Toggle from "./darkMode/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { CartContext } from "./context/CartContext";
+import { LoginContext } from "./context/LoginContext";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState([]);
-  const {cart, cartQuantity} = useContext(CartContext)
+  const { cartQuantity} = useContext(CartContext)
+  const {logOut} = useContext(LoginContext)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -26,8 +28,8 @@ const NavBar = () => {
   return (
     <>
       <header>
-        <nav id="header" className="w-full z-30 top-0 py-1">
-          <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
+        <nav id="header" className="w-full z-30 top-0 py-1 bg-gray-200 drop-shadow-lg">
+          <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3 ">
             <label
               htmlFor="menu-toggle"
               className="cursor-pointer md:hidden block"
@@ -52,13 +54,13 @@ const NavBar = () => {
               <nav>
                 <ul className="md:flex items-center justify-between text-base pt-4 md:pt-0">
                   <li>
-                    <div className="inline-block no-underline hover:text-black hover:underline py-2 px-4">
-                      Shop
+                    <div className="text-stone-600 inline-block no-underline hover:text-black hover:underline py-2 px-4">
+                      Ecomm
                     </div>
                   </li>
                   <li>
                     <a
-                      className="inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                      className="text-stone-600 inline-block no-underline hover:text-black hover:underline py-2 px-4"
                       href="#footer"
                     >
                       About
@@ -74,15 +76,16 @@ const NavBar = () => {
                     src={logo}
                     alt="loguito"
                     style={{
-                      width: 24,
-                      height: 24,
+                      width: 28,
+                      height: 28,
                       viewBox: "0 0 24 24",
                       marginRight: 20,
                     }}
                   />
-                  ecomm
+                  <span className="text-sm text-stone-900 leading-3">  What are you looking for?</span>
                 </div>
               </Link>
+             
             </div>
             <div
               className="order-2 md:order-3 flex items-center"
@@ -95,7 +98,7 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="inline-block no-underline rounded-sm hover:text-black fill-current px-2 py-1 mr-8"
+                  className="inline-block no-underline rounded hover:text-black px-2 py-1 mr-8"
                 >
                 </input>
                 <button
@@ -109,6 +112,9 @@ const NavBar = () => {
               <div className="pl-3 inline-block no-underline hover:text-black">
                 <Toggle />
               </div>
+              <button className="text-xs text-gray-500" onClick={()=> logOut()}>
+                Log out
+              </button>
             </div>
           </div>
         </nav>
