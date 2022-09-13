@@ -41,7 +41,9 @@ const LoginScreen = () => {
     }
 
     isSubscribed !== true
-      ? localStorage.setItem(email, password)
+      ? (localStorage.setItem('email', email) &&
+        localStorage.setItem('password', password))
+      
       : console.log("user not saved");
   };
   

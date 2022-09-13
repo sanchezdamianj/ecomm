@@ -23,7 +23,7 @@ const CartWidget = ({ orderQuantity }) => {
           </svg>
         </div>
         <div className="inline-block text-sm  hover:text-black">
-          {cartQuantity()}
+          {cartQuantity() === 0 ? '': cartQuantity()}
         </div>
       </Link>
     </>

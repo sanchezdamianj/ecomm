@@ -11,7 +11,7 @@ const NavBar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState([]);
   const { cartQuantity} = useContext(CartContext)
-  const {logOut} = useContext(LoginContext)
+  const {user,logOut} = useContext(LoginContext)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -113,7 +113,8 @@ const NavBar = () => {
                 <Toggle />
               </div>
               <button className="text-xs text-gray-500" onClick={()=> logOut()}>
-                Log out
+              <p>Hi { user.user} </p>
+              <p className="text-xs text-gray-400">Log out</p>  
               </button>
             </div>
           </div>
