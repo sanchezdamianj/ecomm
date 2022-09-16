@@ -23,4 +23,5 @@ const requestCategory = (id) => {
   });
 };
 
+
 export { requestDetail, requestCategory, requestSearch };

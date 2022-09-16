@@ -38,7 +38,6 @@ const ItemListContainer = () => {
               <ItemGridNavContainer productType={"Products"} />
             )}
           </>
-
           <ItemList products={products} />
         </div>
       </section>

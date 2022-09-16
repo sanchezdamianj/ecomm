@@ -1,8 +1,8 @@
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { useCartContext } from "./context/CartContext";
 
 export const CartItem = ({ item }) => {
-  const { removeItem } = useCartContext();
+  const { removeItem, isUpdated } = useCartContext();
   const [itemOrderQuantity, setItemOrderQuatity] = useState(item.orderQuantity);
 
   const handleChange = (e) => {
@@ -11,11 +11,15 @@ export const CartItem = ({ item }) => {
 
   const decrement = () => {
     if (itemOrderQuantity > 1) {
-      setItemOrderQuatity(itemOrderQuantity - 1);
+      let itemQuantity = itemOrderQuantity - 1;
+      setItemOrderQuatity(itemQuantity);
+      isUpdated(item.id, itemQuantity);
     }
   };
   const increment = () => {
-    setItemOrderQuatity(itemOrderQuantity + 1);
+    let itemQuantity = itemOrderQuantity + 1
+    setItemOrderQuatity(itemQuantity);
+    isUpdated(item.id, itemQuantity);
   };
 
   return (
@@ -27,7 +31,9 @@ export const CartItem = ({ item }) => {
               <img className="h-24" src={item.image} alt="" />
             </div>
             <div className="flex flex-col justify-between ml-4 flex-grow">
-              <span className="font-bold text-sm text-gray-600 ">{item.title}</span>
+              <span className="font-bold text-sm text-gray-600 ">
+                {item.title}
+              </span>
               <span className="text-red-500 text-xs">{item.id}</span>
               <button
                 onClick={() => removeItem(item.id)}
@@ -70,7 +76,6 @@ export const CartItem = ({ item }) => {
           </div>
         </div>
       </div>
-     
     </div>
   );
 };
