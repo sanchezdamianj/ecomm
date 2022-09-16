@@ -21,7 +21,6 @@ const CartProvider = ({ children }) => {
   const isUpdated = (id, quantity) => {
     let itemUpdated = cart.find((item) => item.id === id);
     itemUpdated.orderQuantity = quantity;
-    console.log('itemUpdated',itemUpdated)
     setTotalCart(cartTotal());
   };
 

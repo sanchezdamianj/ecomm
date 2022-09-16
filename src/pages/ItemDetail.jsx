@@ -187,8 +187,7 @@ const ItemDetail = ({ item }) => {
       </div>
     </>
   ) : (
-    <div className="grid h-48 place-items-center text-sm text-gray-900">
-      Loading Detail ...
+    <div className="grid min-h-screen place-items-center text-sm text-gray-900">
       <CircularProgress isIndeterminate color="green.300" />
     </div>
   );

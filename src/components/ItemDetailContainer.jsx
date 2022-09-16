@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Progress } from '@chakra-ui/react'
+import { Progress } from "@chakra-ui/react";
 import ItemDetail from "../pages/ItemDetail";
 import { requestDetail } from "../helpers/requestData";
 import { useParams } from "react-router-dom";
@@ -25,7 +25,9 @@ const ItemDetailContainer = () => {
     </>
   ) : (
     <>
-   <Progress size='xs' isIndeterminate />
+      <div className="min-h-screen text-md text-bold">
+        <Progress size="xs" isIndeterminate />
+      </div>
     </>
   );
 };

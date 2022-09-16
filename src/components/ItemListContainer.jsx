@@ -43,9 +43,8 @@ const ItemListContainer = () => {
       </section>
     </>
   ) : (
-    <div className="grid h-48 place-items-center">
-      Loading Products ...
-      <CircularProgress isIndeterminate color="green.200" />
+    <div className="grid min-h-screen place-items-center text-md text-bold">
+      <CircularProgress isIndeterminate color="green.300" />
     </div>
   );
 };
