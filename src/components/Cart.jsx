@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { CartItem } from "./CartItem";
+import CartItem  from "./CartItem";
 import { useCartContext } from "./context/CartContext";
+
 import {
   Modal,
   ModalOverlay,
@@ -9,7 +10,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,8 +29,9 @@ const Cart = () => {
   const [overlay, setOverlay] = useState(<OverlayTwo />);
   const navigate = useNavigate();
 
-   
-
+  const handleClick = () =>{
+    navigate({pathname: '/checkout'})
+  }
 
   return (
     <>
@@ -65,18 +67,18 @@ const Cart = () => {
       {cart.map((item) => (
         <CartItem item={item} key={item.id} />
       ))}
-      {
-      console.log(cart)
-      }
+      {console.log(cart)}
       <div className="container mt-0">
         <div className="flex items-center justify-center shadow-md my-2 gap-x-px">
           <div className="w-screen flex items-center mx-auto bg-gray-100 px-5 py-5">
             <button
               type="submit"
+              onClick={handleClick}
               className="w-4/12 mt-0 mx-auto rounded-md border border-transparent bg-green-500 py-3 text-base font-small text-sm text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 px-0 "
             >
               Checkout
             </button>
+
             <button
               type="submit"
               className="w-4/12 mt-0 mx-auto rounded-md border border-transparent bg-orange-400 py-3 text-base font-small text-sm text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 px-0 "

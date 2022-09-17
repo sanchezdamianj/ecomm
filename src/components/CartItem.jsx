@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCartContext } from "./context/CartContext";
 
-export const CartItem = ({ item }) => {
+const CartItem = ({ item }) => {
   const { removeItem, isUpdated } = useCartContext();
   const [itemOrderQuantity, setItemOrderQuatity] = useState(item.orderQuantity);
 
@@ -79,3 +79,5 @@ export const CartItem = ({ item }) => {
     </div>
   );
 };
+
+export default CartItem;
