@@ -5,7 +5,7 @@ const ItemGridNavContainer = ({productType}) => {
  
   return (
     <nav id="store" className="w-full z-30 top-0 px-6 py-1">
-    <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3 text-xs font-bold">
+    <div className="w-full container mx-auto flex flex-wrap items-center justify-center mt-0 px-2 py-3 text-xs font-bold">
       <div className="uppercase tracking-wide no-underline hover:no-underline font-bold text-xl ">
         {productType}
       </div>

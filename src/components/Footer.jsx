@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex w-full lg:w-1/2 ">
           <div className="px-3 md:px-0">
             <h3 className="font-bold text-md text-gray-400">About</h3>
-            <p className="py-4 text-sm font-bold">
+            <p className="py-4 text-xs font-bold">
             <span>Copyright DJS - https://github.com/sanchezdamianj/ecomm</span> 
             </p>
           </div>
@@ -18,7 +18,7 @@ const Footer = () => {
             <h3 className="font-bold text-gray-400 text-md">Social</h3>
             <ul className="list-reset items-center pt-3">
               <li>
-                <a className="inline-block no-underline hover:text-black hover:underline py-1 text-sm font-bold" href='https://www.linkedin.com/in/damianjaviersanchez/'>
+                <a className="inline-block no-underline hover:text-black hover:underline py-1 text-xs font-bold" href='https://www.linkedin.com/in/damianjaviersanchez/'>
                   <span>https://www.linkedin.com/in/damianjaviersanchez/</span>
                 </a>
               </li>

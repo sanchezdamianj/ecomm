@@ -87,13 +87,13 @@ const Checkout = () => {
                 </div>
               </button>
 
+              <hr className="border w-full" />
               <div className="flex flex-row justify-center items-center mt-6">
-                <hr className="border w-full" />
                 <p className="flex flex-shrink-0 px-4 text-base leading-4 text-gray-600">
                   or pay with card
                 </p>
-                <hr className="border w-full" />
               </div>
+              <hr className="border w-full" />
 
               <div className="mt-8">
                 <input
@@ -208,10 +208,10 @@ const Checkout = () => {
                   <div className="flex flex-row justify-start items-start w-full space-y-4 my-0">
                     <img src={item.image} alt="pic" />
                     <div className="text-xl md:text-sm leading-normal text-gray-800 mx-4">
-                      {item.orderQuantity} 
+                      {item.orderQuantity}
                     </div>
                     <div className="text-xl md:text-sm leading-normal text-gray-800 mx-0">
-                    x {item.title}
+                      x {item.title}
                       <p className="text-base font-semibold leading-none text-md text-gray-600 my-2">
                         ${item.price}
                       </p>

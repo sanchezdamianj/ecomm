@@ -5,14 +5,12 @@ import NoDataFound from "../components/NoDataFound";
 import { requestCategory } from "../helpers/requestData";
 import { CircularProgress, Alert, AlertIcon } from "@chakra-ui/react";
 import { CartContext } from "../components/context/CartContext";
-import { useNavigate } from "react-router-dom";
-
 
 const ItemDetail = ({ item }) => {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const { addToCart, isInCart} = useContext(CartContext);
+  const { addToCart, isInCart } = useContext(CartContext);
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
@@ -38,7 +36,6 @@ const ItemDetail = ({ item }) => {
       setFlag(false);
     } else {
       setFlag(true);
-      console.log(flag)
     }
   };
 

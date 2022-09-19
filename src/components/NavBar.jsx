@@ -10,8 +10,8 @@ import { LoginContext } from "./context/LoginContext";
 const NavBar = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState([]);
-  const { cartQuantity} = useContext(CartContext)
-  const {user,logOut} = useContext(LoginContext)
+  const { cartQuantity } = useContext(CartContext);
+  const { user, logOut } = useContext(LoginContext);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -28,8 +28,11 @@ const NavBar = () => {
   return (
     <>
       <header>
-        <nav id="header" className="w-full z-30 top-0 py-1 bg-gray-200 drop-shadow-lg">
-          <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3 ">
+        <nav
+          id="header"
+          className="w-screen z-30 top-0 py-1 bg-gray-200 drop-shadow-lg"
+        >
+          <div className="w-full container mx-auto flex flex-wrap items-center justify-center mt-0 px-6 py-3 ">
             <label
               htmlFor="menu-toggle"
               className="cursor-pointer md:hidden block"
@@ -52,41 +55,52 @@ const NavBar = () => {
               id="menu"
             >
               <nav>
-                <ul className="md:flex items-center justify-between text-base pt-4 md:pt-0">
+                <ul className="md:flex items-center justify-start text-base pt-4 md:pt-0">
                   <li>
-                    <div className="text-stone-600 inline-block no-underline hover:text-black hover:underline py-2 px-4">
+                    <div className="order-1 md:order-2">
+                      <Link to="/" onClick={home}>
+                        <div className="flex items-center tracking-wide no-underline hover:no-underline font-semibold text-lg px-4">
+                          <img
+                            src={logo}
+                            alt="loguito"
+                            style={{
+                              width: 24,
+                              height: 24,
+                              viewBox: "0 0 24 24",
+                              marginRight: 10,
+                              marginLeft: 10,
+                            }}
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="text-gray-500 font-semibold inline-flex no-underline hover:text-black hover:underline py-2 px-4">
                       Ecomm
                     </div>
                   </li>
                   <li>
                     <a
-                      className="text-stone-600 inline-block no-underline hover:text-black hover:underline py-2 px-4"
+                      className="text-gray-500 inline-flex no-underline hover:text-black hover:underline py-2 px-4"
                       href="#footer"
                     >
                       About
                     </a>
                   </li>
+                  <li>
+                    <button
+                      className="text-xs text-gray-50 px-4 md:hidden"
+                      onClick={() => logOut()}
+                    >
+                      <p className="text-gray-500">Hi {user.user} </p>
+                      <p className="text-gray-400"> Log out</p>
+                    </button>
+                  </li>
                 </ul>
               </nav>
             </div>
-            <div className="order-1 md:order-2">
-              <Link to="/" onClick={home}>
-                <div className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-xl">
-                  <img
-                    src={logo}
-                    alt="loguito"
-                    style={{
-                      width: 28,
-                      height: 28,
-                      viewBox: "0 0 24 24",
-                      marginRight: 20,
-                    }}
-                  />
-                  <span className="text-sm text-stone-900 leading-3">  What are you looking for?</span>
-                </div>
-              </Link>
-             
-            </div>
+
             <div
               className="order-2 md:order-3 flex items-center"
               id="nav-content"
@@ -98,23 +112,26 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="inline-block no-underline rounded hover:text-black px-2 py-1 mr-8"
-                >
-                </input>
+                  className="w-52 no-underline rounded-xl hover:text-black px-1 py-1 mx-2 inline-flex"
+                ></input>
                 <button
                   type="submit"
-                  className="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-xs px-4 py-2 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
+                  className="mx-0 text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-xs px-2 py-2 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
                 >
                   Search
                 </button>
               </form>
-              <CartWidget orderQuantity={cartQuantity}/>
-              <div className="pl-3 inline-block no-underline hover:text-black">
+              <CartWidget orderQuantity={cartQuantity} />
+              <div className="pl-3 inline-block no-underline hover:text-black hidden md:inline-flex">
                 <Toggle />
               </div>
-              <button className="text-xs text-gray-500" onClick={()=> logOut()}>
-              <p>Hi { user.user} </p>
-              <p className="text-xs text-gray-400">Log out</p>  
+
+              <button
+                className="text-xs text-gray-500 hidden lg:inline-flex"
+                onClick={() => logOut()}
+              >
+                <p>Hi {user.user} </p>
+                <p className="text-xs text-gray-400 mx-2"> Log out</p>
               </button>
             </div>
           </div>

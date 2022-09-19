@@ -5,7 +5,7 @@ const Item = ({ product }) => {
     <>
             <Link to={`/items/${product.id}`}>
       <div className="hover:grow hover:shadow-lg rounde-sm rounded-3xl px-2 py-2">
-        <div key={product.id} href="#footer">
+        <div key={product.id}>
           <div className="relative">
             <img
               className="w-full rounded-3xl"
