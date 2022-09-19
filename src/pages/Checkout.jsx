@@ -203,10 +203,18 @@ const Checkout = () => {
             </div>
 
             <div className="xl:w-6/12 flex flex-col sm:flex-col xl:flex-col justify-center items-center sm:py-0 xl:py-10 px-10 xl:w-full">
+                      <p className="text-current text-xl text-left py-2 font-bold">Review your order</p>
               {cart.map((item) => (
                 <>
-                  <div className="flex flex-row justify-start items-start w-full space-y-4 my-0">
-                    <img src={item.image} alt="pic" />
+                  <div
+                    key={item.id}
+                    className="flex flex-row justify-start items-start w-full space-y-4 my-0 border"
+                  >
+                    <img
+                      src={item.image}
+                      alt="pic"
+                      className="h-44 w-32 xl:w-full lg:w-full sm:w-full rounded-3xl "
+                    />
                     <div className="text-xl md:text-sm leading-normal text-gray-800 mx-4">
                       {item.orderQuantity}
                     </div>
@@ -217,9 +225,8 @@ const Checkout = () => {
                       </p>
                     </div>
                   </div>
-                  <p className=" mb-4">
-                    <hr className="border w-1/2" />
-                  </p>
+
+                  <hr className="border w-1/2" />
                 </>
               ))}
             </div>

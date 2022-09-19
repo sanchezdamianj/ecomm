@@ -4,10 +4,10 @@ const ItemStock = ({ product }) => {
   return (
     <>
       <Link to={`/items/${product.id}`}>
-        <div className="flex flex-col items-start rounded rounded-3xl px-2 py-2 min-h-full bg-gray-200">
+        <div className="flex flex-col items-center rounded rounded-3xl px-2 py-2 bg-gray-200 ">
           <div key={product.id} className="flex flex-row sm:flex-col">
             <img
-              className="object-fit xl:w-full lg:w-full sm:w-full rounded-3xl "
+              className="h-52 w-32 object-fill xl:w-full lg:w-full sm:w-full rounded-3xl "
               src={product.thumbnail}
               alt="imag"
             />
