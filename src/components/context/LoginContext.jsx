@@ -45,8 +45,16 @@ export const LoginProvider = ({children}) => {
             logged: false
         })
     }
+
+    const productUploadSuccess = (id) =>{
+        swal({
+          title: `Product Saved!`,
+          text: `Product Number ${id} upload in firebase cloud store`,
+          icon: "success",
+        });
+      }
     return (
-        <LoginContext.Provider value={{user, login, logOut}}>
+        <LoginContext.Provider value={{user, login, logOut,productUploadSuccess}}>
             {children}
         </LoginContext.Provider>
     )

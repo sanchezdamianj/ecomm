@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CartItem  from "./CartItem";
-import { useCartContext } from "./context/CartContext";
+import CartItem  from "../components/CartItem";
+import { useCartContext } from "../components/context/CartContext";
 
 import {
   Modal,
@@ -30,7 +30,11 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleClick = () =>{
-    navigate({pathname: '/checkout'})
+    if(cart.length !== 0){
+      navigate({pathname: '/checkout'})
+    } else{
+      navigate({pathname: '/'})
+    }
   }
 
   return (

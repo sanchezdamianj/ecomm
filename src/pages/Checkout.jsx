@@ -1,18 +1,93 @@
 import React, { useState } from "react";
 import { useCartContext } from "../components/context/CartContext";
-// import CartItem  from "../components/CartItem";
-// import Cart from "../components/Cart";
 import { Link } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const Checkout = () => {
-  const { cart, cartTotal } = useCartContext();
+  const { cart, cartTotal, emptyCart, purchaseSuccess } = useCartContext();
   const countries = ["EEUU", "ARGENTINA", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
+  const navigate = useNavigate();
+  let error = [];
+
+  const expresions = {
+    buyerName: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letters & spaces, tildes.
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, //email format.
+    cardNumber: /^\d{16,17}$/, // 16-17 numbers,
+    dueDate: /^.{4,5}$/, // 5 digits.
+    cvc: /^\d{3,4}$/, // 3-4 numebrs.
+    zip: /^\d{4,6}$/, // 4-6 numbers.
+  };
+
+  const [values, setValues] = useState({
+    buyerName: "",
+    email: "",
+    cardNumber: "",
+    dueDate: "",
+    cvc: "",
+    zip: "",
+  });
 
   const changeText = (e) => {
     setMenu(false);
     setCountry(e.target.textContent);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const order = {
+      buyer: values,
+      country: country,
+      items: cart,
+      totalAmount: cartTotal(),
+    };
+    validateForm();
+    const ordersRef = collection(db, "orders");
+    if (error.length === 0) {
+      addDoc(ordersRef, order).then((doc) => purchaseSuccess(doc.id));
+
+      navigate({ pathname: "/" });
+      emptyCart();
+      error = [];
+    } else {
+      swal({
+        title: "Wrong data",
+        text: `Errors: ${error[0]}`,
+        icon: "error",
+      });
+    }
+  };
+
+  const validateForm = () => {
+    if (!expresions.email.test(values.email)) {
+      error.push("wrong email");
+    }
+    if (!expresions.buyerName.test(values.buyerName)) {
+      error.push("wrong username");
+    }
+    if (!expresions.cardNumber.test(values.cardNumber)) {
+      error.push("wrong card");
+    }
+    if (!expresions.dueDate.test(values.dueDate)) {
+      error.push("wrong due date");
+    }
+    if (!expresions.cvc.test(values.cvc)) {
+      error.push("wrong cvc");
+    }
+    if (!expresions.zip.test(values.zip)) {
+      error.push("wrong zip");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -55,13 +130,16 @@ const Checkout = () => {
                 <p className="text-sm leading-none">Back</p>
               </button>
             </Link>
-            <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">
+            <p className="text-3xl lg:text-4xl font-semibold leading-7 px-8 lg:leading-9 text-gray-800">
               Checkout
             </p>
           </div>
 
           <div className="flex flex-col xl:flex-row justify-center xl:justify-between space-y-6 xl:space-y-0 xl:space-x-6 w-full">
-            <div className="p-8 bg-gray-100 flex flex-col lg:w-full xl:w-3/5">
+            <form
+              className="p-8 bg-gray-100 flex flex-col lg:w-full xl:w-3/5"
+              onSubmit={handleSubmit}
+            >
               <button className="border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex flex-row justify-center items-center space-x-2 py-4 rounded w-full">
                 <div>
                   <svg
@@ -94,15 +172,17 @@ const Checkout = () => {
                 </p>
               </div>
               <hr className="border w-full" />
-
-              <div className="mt-8">
-                <input
-                  className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="email"
-                  placeholder="Email"
-                />
-              </div>
-
+              <label className="mt-8 mb-2 text-base leading-4 text-gray-800">
+                Email
+              </label>
+              <input
+                className="border border-gray-300 p-4 rounded w-full text-base leading-4 placeholder-gray-600 text-gray-600"
+                type={"email"}
+                name="email"
+                placeholder="Enter your email"
+                onChange={handleInputChange}
+                value={values.email}
+              />
               <label className="mt-8 text-base leading-4 text-gray-800">
                 Card details
               </label>
@@ -110,20 +190,33 @@ const Checkout = () => {
                 <div>
                   <input
                     className="border rounded-tl rounded-tr border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                    type="email"
+                    type={"text"}
                     placeholder="0000 1234 6549 15151"
+                    onChange={handleInputChange}
+                    name="cardNumber"
+                    value={values.cardNumber}
                   />
                 </div>
                 <div className="flex-row flex">
                   <input
                     className="border rounded-bl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                    type="email"
+                    type={"text"}
                     placeholder="MM/YY"
+                    name="dueDate"
+                    maxLength={5}
+                    required
+                    onChange={handleInputChange}
+                    value={values.dueDate}
                   />
                   <input
                     className="border rounded-br border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                    type="email"
+                    type={"text"}
                     placeholder="CVC"
+                    required
+                    maxLength={4}
+                    name="cvc"
+                    onChange={handleInputChange}
+                    value={values.cvc}
                   />
                 </div>
               </div>
@@ -135,8 +228,11 @@ const Checkout = () => {
                 <div>
                   <input
                     className="border rounded border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                    type="email"
+                    type={"text"}
                     placeholder="Name on card"
+                    name="buyerName"
+                    onChange={handleInputChange}
+                    value={values.buyerName}
                   />
                 </div>
               </div>
@@ -148,7 +244,10 @@ const Checkout = () => {
                 <div className="relative">
                   <button
                     className="text-left border rounded-tr rounded-tl border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600 bg-white"
-                    type="email"
+                    type={"text"}
+                    onChange={handleInputChange}
+                    value={country}
+                    name="country"
                   >
                     {country}
                   </button>
@@ -188,10 +287,14 @@ const Checkout = () => {
                     ))}
                   </div>
                 </div>
+
                 <input
                   className="border rounded-bl rounded-br border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600"
-                  type="text"
+                  type={"text"}
                   placeholder="ZIP"
+                  name="zip"
+                  onChange={handleInputChange}
+                  value={values.zip}
                 />
               </div>
 
@@ -200,10 +303,12 @@ const Checkout = () => {
                   <p className="text-base leading-4">Pay ${cartTotal()}</p>
                 </div>
               </button>
-            </div>
+            </form>
 
             <div className="xl:w-6/12 flex flex-col sm:flex-col xl:flex-col justify-center items-center sm:py-0 xl:py-10 px-10 xl:w-full">
-                      <p className="text-current text-xl text-left py-2 font-bold">Review your order</p>
+              <p className="text-current text-xl text-left py-2 font-bold">
+                Review your order
+              </p>
               {cart.map((item) => (
                 <>
                   <div

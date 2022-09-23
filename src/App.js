@@ -1,5 +1,4 @@
 import React from "react";
-import { ThemeProvider } from "./components/darkMode/ThemeContext";
 import Background from "./components/darkMode/Background";
 import CartProvider from "./components/context/CartContext";
 import AppRoutes from "./router/AppRoutes";
@@ -10,11 +9,9 @@ function App() {
     <>
       <LoginProvider>
         <CartProvider>
-          <ThemeProvider>
-            <Background>
-              <AppRoutes />
-            </Background>
-          </ThemeProvider>
+          <Background>
+            <AppRoutes />
+          </Background>
         </CartProvider>
       </LoginProvider>
     </>

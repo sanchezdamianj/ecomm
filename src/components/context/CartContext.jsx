@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import swal from "sweetalert";
 
 export const CartContext = createContext();
 
@@ -40,6 +41,13 @@ const CartProvider = ({ children }) => {
   const emptyCart = () => {
     setCart([]);
   };
+  const purchaseSuccess = (id) =>{
+    swal({
+      title: `Order Saved!`,
+      text: `Order ${id} upload in firebase cloud store`,
+      icon: "success",
+    });
+  }
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -56,7 +64,8 @@ const CartProvider = ({ children }) => {
         removeItem,
         emptyCart,
         isUpdated,
-        totalCart
+        totalCart,
+        purchaseSuccess
       }}
     >
       {children}

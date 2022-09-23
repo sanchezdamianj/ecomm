@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import CartWidget from "./CartWidget";
-import Toggle from "./darkMode/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { CartContext } from "./context/CartContext";
@@ -24,6 +23,11 @@ const NavBar = () => {
   const home = () => {
     setSearch(" ");
     navigate("/");
+  };
+
+  const userAccount = () => {
+    setSearch("");
+    navigate("/userAccount");
   };
   return (
     <>
@@ -55,7 +59,7 @@ const NavBar = () => {
               id="menu"
             >
               <nav>
-                <ul className="md:flex items-center justify-start text-base pt-4 md:pt-0">
+                <ul className="md:flex items-center justify-start text-base pt-4 md:pt-0 ml-0">
                   <li>
                     <div className="order-1 md:order-2">
                       <Link to="/" onClick={home}>
@@ -76,25 +80,24 @@ const NavBar = () => {
                     </div>
                   </li>
                   <li>
-                    <div className="text-gray-500 font-semibold inline-flex no-underline hover:text-black hover:underline py-2 px-4">
-                      Ecomm
-                    </div>
-                  </li>
-                  <li>
                     <a
-                      className="text-gray-500 inline-flex no-underline hover:text-black hover:underline py-2 px-4"
+                      className=" text-xs text-semibold text-gray-500 inline-flex no-underline hover:text-black hover:underline py-2 px-0"
                       href="#footer"
                     >
                       About
                     </a>
                   </li>
                   <li>
+                    <Link to={"/userAccount"} onClick={userAccount}>
+                      <div className="text-xs text-gray-500 ml-4 md:hidden">
+                        Hi {user.user}
+                      </div>
+                    </Link>
                     <button
-                      className="text-xs text-gray-50 px-4 md:hidden"
+                      className="text-xs text-gray-50 px-4"
                       onClick={() => logOut()}
                     >
-                      <p className="text-gray-500">Hi {user.user} </p>
-                      <p className="text-gray-400"> Log out</p>
+                      <p className="text-gray-400 md:hidden">Log out</p>
                     </button>
                   </li>
                 </ul>
@@ -112,7 +115,7 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="w-52 no-underline rounded-xl hover:text-black px-1 py-1 mx-2 inline-flex"
+                  className="w-80 no-underline rounded-xl hover:text-black px-1 py-1 mx-2 inline-flex"
                 ></input>
                 <button
                   type="submit"
@@ -122,16 +125,28 @@ const NavBar = () => {
                 </button>
               </form>
               <CartWidget orderQuantity={cartQuantity} />
-              <div className="pl-3 inline-block no-underline hover:text-black hidden md:inline-flex">
-                <Toggle />
-              </div>
+              <Link to={"/userAccount"} onClick={userAccount}>
+                <button className="text-xs text-gray-500 hidden md:inline-block px-2">
+                  <svg
+                    style={{
+                      width: 15,
+                      height: 15,
+                      viewBox: "0 0 15 15",
+                      marginRight: 20,
+                      marginLeft: 20,
+                    }}
+                  >
+                    <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+                  </svg>
+                  {user.user}
+                </button>
+              </Link>
 
               <button
-                className="text-xs text-gray-500 hidden lg:inline-flex"
+                className="text-xs text-gray-500 hidden md:inline-block"
                 onClick={() => logOut()}
               >
-                <p>Hi {user.user} </p>
-                <p className="text-xs text-gray-400 mx-2"> Log out</p>
+                <p className="text-xs text-gray-400 mx-1"> Log out</p>
               </button>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useCartContext } from "./context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 const CartItem = ({ item }) => {
-  const { removeItem, isUpdated } = useCartContext();
+  const { removeItem, isUpdated, cart } = useCartContext();
   const [itemOrderQuantity, setItemOrderQuatity] = useState(item.orderQuantity);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setItemOrderQuatity(e.target.value);
@@ -17,9 +19,16 @@ const CartItem = ({ item }) => {
     }
   };
   const increment = () => {
-    let itemQuantity = itemOrderQuantity + 1
+    let itemQuantity = itemOrderQuantity + 1;
     setItemOrderQuatity(itemQuantity);
     isUpdated(item.id, itemQuantity);
+  };
+
+  const handleRemove = (id) => {
+    removeItem(id);
+    if (cart.length <= 1) {
+      navigate({ pathname: "/" });
+    }
   };
 
   return (
@@ -36,7 +45,7 @@ const CartItem = ({ item }) => {
               </span>
               <span className="text-red-500 text-xs">{item.id}</span>
               <button
-                onClick={() => removeItem(item.id)}
+                onClick={() => handleRemove(item.id)}
                 className="font-semibold hover:text-red-500 text-gray-500 text-xs"
               >
                 Remove
