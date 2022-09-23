@@ -61,7 +61,7 @@ const Cart = () => {
                 Price
               </h3>
               <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
-                Total: ${cartTotal()}
+                Total: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartTotal())}
               </h3>
             </div>
           </div>

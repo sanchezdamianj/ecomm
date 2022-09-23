@@ -28,7 +28,7 @@ const Item = ({ product }) => {
               </button>
           </div>
           <p className="pt-1 pb-4 hover:grow font-bold text-xl">
-            $ {product.price}
+            {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
           </p>
         </div>
       </div>

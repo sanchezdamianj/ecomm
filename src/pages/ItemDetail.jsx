@@ -118,7 +118,7 @@ const ItemDetail = ({ item }) => {
             {/* <!-- Options --> */}
             <div className="mt-2 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight">$ {item.price}</p>
+              <p className="text-3xl tracking-tight">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}</p>
               {/* <!-- Reviews --> */}
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>

@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useCartContext } from "../components/context/CartContext";
 import { Link } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  documentId,
+  writeBatch,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
@@ -37,7 +45,7 @@ const Checkout = () => {
     setCountry(e.target.textContent);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const order = {
       buyer: values,
@@ -46,17 +54,44 @@ const Checkout = () => {
       totalAmount: cartTotal(),
     };
     validateForm();
+    const batch = writeBatch(db);
     const ordersRef = collection(db, "orders");
-    if (error.length === 0) {
-      addDoc(ordersRef, order).then((doc) => purchaseSuccess(doc.id));
+    const stockRef = collection(db, "stock");
+    const q = query(
+      stockRef,
+      where(
+        documentId(),
+        "in",
+        cart.map((item) => item.id)
+      )
+    );
+    const products = await getDocs(q);
+    const outOfStock = [];
 
+    if (error.length === 0) {
+      products.docs.forEach((doc) => {
+        const itemInCart = cart.find((item) => item.id === doc.id);
+        if (doc.data().available_quantity >= itemInCart.orderQuantity) {
+          batch.update(doc.ref, {
+            available_quantity:
+              doc.data().available_quantity - itemInCart.orderQuantity,
+          });
+        } else {
+          outOfStock.push(itemInCart);
+        }
+      });
+      if (outOfStock.length === 0) {
+        batch.commit().then((doc) => {
+          addDoc(ordersRef, order).then((doc) => purchaseSuccess(doc.id));
+        });
+      }
       navigate({ pathname: "/" });
       emptyCart();
       error = [];
     } else {
       swal({
         title: "Wrong data",
-        text: `Errors: ${error[0]}`,
+        text: `Errors: ${error[0]}${outOfStock[0]}`,
         icon: "error",
       });
     }
@@ -300,7 +335,7 @@ const Checkout = () => {
 
               <button className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
                 <div>
-                  <p className="text-base leading-4">Pay ${cartTotal()}</p>
+                  <p className="text-base leading-4">Pay {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cartTotal())}</p>
                 </div>
               </button>
             </form>
@@ -326,7 +361,7 @@ const Checkout = () => {
                     <div className="text-xl md:text-sm leading-normal text-gray-800 mx-0">
                       x {item.title}
                       <p className="text-base font-semibold leading-none text-md text-gray-600 my-2">
-                        ${item.price}
+                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}
                       </p>
                     </div>
                   </div>

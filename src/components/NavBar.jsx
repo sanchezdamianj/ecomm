@@ -63,7 +63,7 @@ const NavBar = () => {
                   <li>
                     <div className="order-1 md:order-2">
                       <Link to="/" onClick={home}>
-                        <div className="flex items-center tracking-wide no-underline hover:no-underline font-semibold text-lg px-4">
+                        <div className="flex items-center tracking-wide no-underline hover:no-underline font-semibold text-lg px-2 py-2">
                           <img
                             src={logo}
                             alt="loguito"
@@ -72,16 +72,19 @@ const NavBar = () => {
                               height: 24,
                               viewBox: "0 0 24 24",
                               marginRight: 10,
-                              marginLeft: 10,
+                              marginLeft: 10                        
                             }}
                           />
                         </div>
                       </Link>
                     </div>
                   </li>
+                  <li className="px-0">
+                    <CartWidget orderQuantity={cartQuantity} />
+                  </li>
                   <li>
                     <a
-                      className=" text-xs text-semibold text-gray-500 inline-flex no-underline hover:text-black hover:underline py-2 px-0"
+                      className=" text-xs text-semibold text-gray-500 inline-flex no-underline hover:text-black hover:underline py-2 px-4"
                       href="#footer"
                     >
                       About
@@ -105,7 +108,7 @@ const NavBar = () => {
             </div>
 
             <div
-              className="order-2 md:order-3 flex items-center"
+              className="order-2 md:order-3 flex items-center justify-center"
               id="nav-content"
             >
               <form onSubmit={handleSearch}>
@@ -115,16 +118,15 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="w-80 no-underline rounded-xl hover:text-black px-1 py-1 mx-2 inline-flex"
+                  className="md:w-80 no-underline rounded-xl md:text-xs hover:text-black px-1 py-1 mx-2"
                 ></input>
                 <button
                   type="submit"
-                  className="mx-0 text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-xs px-2 py-2 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
+                  className="mx-0 text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-xs rounded-lg text-xs px-2 py-2 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-800"
                 >
                   Search
                 </button>
               </form>
-              <CartWidget orderQuantity={cartQuantity} />
               <Link to={"/userAccount"} onClick={userAccount}>
                 <button className="text-xs text-gray-500 hidden md:inline-block px-2">
                   <svg

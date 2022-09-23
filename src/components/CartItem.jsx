@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
         <div className="w-full bg-sky-50 px-10 py-10">
           <div className="flex mt-10 mb-5">
             <div className="w-24">
-              <img className="h-24" src={item.image} alt="" />
+              <img className="h-24" src={item.image} alt="imagen product" />
             </div>
             <div className="flex flex-col justify-between ml-4 flex-grow">
               <span className="font-bold text-sm text-gray-600 ">
@@ -77,10 +77,10 @@ const CartItem = ({ item }) => {
             </div>
 
             <span className="text-center w-1/5 font-semibold text-sm text-gray-600 ">
-              ${item.price}
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}
             </span>
             <span className="text-center w-1/5 font-semibold text-sm text-gray-600 ">
-              ${item.price * itemOrderQuantity}
+              {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price * itemOrderQuantity)}
             </span>
           </div>
         </div>

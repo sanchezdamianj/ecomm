@@ -14,7 +14,7 @@ const ItemStock = ({ product }) => {
             <div className="flex flex-col mx-2 ">
               <p className="pt-3 text-xs text-gray-500 ml-0">{product.title}</p>
               <p className="pt-2 text-black-400 text-xs flex items-center justify-start font-semibold">
-                ${product.price}
+                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)}
               </p>
             </div>
           </div>
