@@ -4,8 +4,9 @@ This is a React v18 proyect, creating an e-commerce with Tailwing css framework 
 In the project we consume an API to get data with differents endpoints from the frontend.
 
 ## Get started with this application 🚀
-![gif](ecomm.gif)
-<img width="1680" alt="Screen Shot 2022-09-05 at 16 14 53" src="https://user-images.githubusercontent.com/11862649/188504277-b3629f05-5778-466b-b249-053c7f058ba4.png">
+![gif](E-comm part 1.gif)
+![gif](E-comm part 2.gif)
+![gif](E-comm part 3.gif)
 
 ### Pre-requisites 📋
 
@@ -36,6 +37,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+Step 1 when the app is running, you must to create a user with an email, and password
+Step 2 Logged with your credential
 
 ## Construido con 🛠️
 
