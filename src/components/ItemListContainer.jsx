@@ -21,7 +21,7 @@ const ItemListContainer = () => {
     getDocs(productsRef)
       .then((response) => {
         const productsDB = response.docs.map((doc) => ({
-          id: doc.id,
+          id: doc.id, 
           ...doc.data(),
         }));
         setStock(productsDB);

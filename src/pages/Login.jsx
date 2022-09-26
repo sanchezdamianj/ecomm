@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import { LoginContext } from "../components/context/LoginContext";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure
-  } from "@chakra-ui/react";
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 const LoginScreen = () => {
   const { login } = useContext(LoginContext);
@@ -20,7 +20,7 @@ const LoginScreen = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -41,12 +41,11 @@ const LoginScreen = () => {
     }
 
     isSubscribed !== true
-      ? (localStorage.setItem('email', email) &&
-        localStorage.setItem('password', password))
-      
+      ? localStorage.setItem("email", email) &&
+        localStorage.setItem("password", password)
       : console.log("user not saved");
   };
-  
+
   const OverlayTwo = () => (
     <ModalOverlay
       bg="none"
@@ -55,30 +54,30 @@ const LoginScreen = () => {
       backdropBlur="2px"
     />
   );
- 
+
   const [overlay, setOverlay] = useState(<OverlayTwo />);
 
-
   return (
-    <div className="flex h-screen mx-auto items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="w-full max-w-md space-y-8">
+    <div className="flex h-screen mx-auto items-center justify-center py-12">
+      <div className="w-full max-w-md space-y-4">
         <div className="flex items-center justify-center">
           <img
             src={logo}
             alt="loguito"
             style={{
-              width: 28,
-              height: 28,
-              viewBox: "0 0 24 24",
+              width: 32,
+              height: 32,
+              viewBox: "0 0 32 32",
               marginRight: 20,
             }}
           />
-          <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
+        </div>
+        <p className="flex mx-auto text-gray-500 items-center justify-center">Welcome to E-Comm</p> 
+          <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900">
             Sign in to your account
           </h2>
-        </div>
         <form
-          className="mt-8 space-y-6"
+          className="mt-4 space-y-6"
           action="#"
           method="POST"
           onSubmit={handleSubmit}
@@ -125,20 +124,20 @@ const LoginScreen = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                className="h-4 w-4 rounded-full border-gray-300 text-gray-600 text-sm font-medium focus:ring-gray-500 ml-2"
                 value={isSubscribed}
               />
-              <label className="ml-2 block text-sm text-gray-900">
+              <label className="ml-2 block text-sm text-gray-500">
                 Remember me
               </label>
             </div>
 
             <div className="text-sm">
               <Link
-                to={"/Login"}
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                to={"/signup"}
+                className="font-medium text-indigo-600 hover:text-indigo-500 mr-2"
               >
-                Forgot your password?
+                create your account here
               </Link>
             </div>
           </div>
@@ -147,8 +146,8 @@ const LoginScreen = () => {
             <button
               type="submit"
               onClick={() => {
-                  setOverlay(<OverlayTwo />);
-                  onOpen();
+                setOverlay(<OverlayTwo />);
+                onOpen();
               }}
               className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >

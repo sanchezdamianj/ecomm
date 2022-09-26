@@ -92,7 +92,7 @@ const NavBar = () => {
                   </li>
                   <li>
                     <Link to={"/userAccount"} onClick={userAccount}>
-                      <div className="text-xs text-gray-500 ml-4 md:hidden">
+                      <div className="text-xs text-gray-500 md:hidden">
                         Hi {user.user}
                       </div>
                     </Link>
@@ -118,7 +118,7 @@ const NavBar = () => {
                   value={search}
                   onChange={handleChange}
                   placeholder="What are you looking for?"
-                  className="md:w-80 no-underline rounded-xl md:text-xs hover:text-black px-1 py-1 mx-2"
+                  className="md:w-80 no-underline rounded-xl text-xs hover:text-black px-1 py-1 mx-2"
                 ></input>
                 <button
                   type="submit"
