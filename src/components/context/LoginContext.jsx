@@ -56,8 +56,6 @@ export const LoginProvider = ({ children }) => {
         });
       }
     } else {
-      console.log("values", values);
-      console.log("users", users);
       swal("Wrong email", "Try again!", "error", {
         button: "Try again!",
       });
